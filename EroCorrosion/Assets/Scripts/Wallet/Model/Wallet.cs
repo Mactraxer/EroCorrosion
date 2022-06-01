@@ -23,5 +23,6 @@ public class Wallet
     public void DoTransaction(int value)
     {
         if (CanDoTransaction(value) == false) { throw new System.ArgumentException("Have not money in wallet for do transaction");  }
+        _money -= value;
     }
 }

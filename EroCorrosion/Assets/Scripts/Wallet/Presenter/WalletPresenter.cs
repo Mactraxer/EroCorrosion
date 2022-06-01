@@ -12,11 +12,13 @@ public class WalletPresenter: IWalletPresenter, IWallet
     {
         _view = view;
         _wallet = new Wallet(100);
+        _view.UpdateWallet(_wallet._money.ToString());
     }
 
     void IWallet.DoTransaction(int value)
     {
         _wallet.DoTransaction(value);
+        _view.UpdateWallet(_wallet._money.ToString());
     }
 
     bool IWallet.CanDoTransaction(int value)
@@ -24,5 +26,4 @@ public class WalletPresenter: IWalletPresenter, IWallet
         return _wallet.CanDoTransaction(value);
     }
 
-    
 }

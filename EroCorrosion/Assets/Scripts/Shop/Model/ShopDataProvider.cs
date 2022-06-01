@@ -1,33 +1,5 @@
 using System.Collections.Generic;
 
-public class ShopItemModel
-{
-    public enum ShopItemType
-    {
-        warriorEgg, metalCorrosionEgg, leathCorrosionEgg, clothCorrosionEgg, mineralCorrosionEgg, woodCorrosionEgg
-    }
-
-    public string _name { get; private set; }
-    public int _price { get; private set; }
-    public string _imagePath { get; private set; }
-    public ShopItemType _type { get; private set; }
-
-    public ShopItemModel(string name, int price, string imagePath, ShopItemType type)
-    {
-        _name = name;
-        _price = price;
-        _imagePath = imagePath;
-        _type = type;
-    }
-
-}
-
-public interface IShopDataProvider 
-{
-    public ShopItemModel[] GetFiltredModels(ShopContentFilter filter);
-}
-
-
 public class ShopDataProvider: IShopDataProvider
 {
 
@@ -53,6 +25,17 @@ public class ShopDataProvider: IShopDataProvider
     {
         ShopItemModel[] filtredModels = models.FindAll((item) => FilterTypeCompare(filter, item._type)).ToArray();
         return filtredModels;
+    }
+
+    ShopItemModel IShopDataProvider.GetModelBy(string name)
+    {
+        ShopItemModel model = models.Find((item) => item._name == name);
+        if (model == null)
+        {
+            throw new System.ArgumentException($"Not found ShopItemModel with name = '{name}'");
+        }
+
+        return model;
     }
 
     private bool FilterTypeCompare(ShopContentFilter shopFilter, ShopItemModel.ShopItemType itemType)
@@ -84,4 +67,6 @@ public class ShopDataProvider: IShopDataProvider
 
         return result;
     }
+
+    
 }

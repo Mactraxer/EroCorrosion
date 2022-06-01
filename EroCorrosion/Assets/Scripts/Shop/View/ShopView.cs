@@ -26,6 +26,12 @@ public class ShopView : MonoBehaviour, IShopView
 
     // IShopView interface
     public event Action<ShopContentFilter> TapTab;
+    public event Action<string> TapOnCellButton;
+
+    public void PrintError(string message)
+    {
+        print(message);
+    }
 
     public void UpdateView(ShopItemModel[] models)
     {
@@ -34,6 +40,7 @@ public class ShopView : MonoBehaviour, IShopView
         for(int i = 0; i< models.Length; i++)
         {
             CellContent instantiatedContent = Instantiate(_cellPrefab, _contentTransform);
+            instantiatedContent.TapOnButton += TapOnCellButton;
             instantiatedContent.UpdateCell(models[i]._name, models[i]._imagePath, models[i]._price);
         }
     }
