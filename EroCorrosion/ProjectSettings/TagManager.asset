@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Girl
+    uniqueID: 522267509
+    locked: 0
+  - name: Block
+    uniqueID: 3089813431
+    locked: 0
+  - name: Environment
+    uniqueID: 1311629869
+    locked: 0
