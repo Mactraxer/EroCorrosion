@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Digger : MonoBehaviour
 {
-    [SerializeField] private DigTrigger _trigger;
-    [SerializeField] private DigTool _tool;
+    public Action<int, ResourceModel> OnDigBlock;
 
-    public void Dig()
+    [SerializeField] private DigTrigger _trigger;
+    public void Dig(int damage)
     {
         Block block = _trigger.TriggeredBlock;
         if (block == null) return;
 
-        int damage = _tool.Damage;
         block.ApplyDamage(damage);
+        OnDigBlock?.Invoke(blockCount, block.Price);
     }
 }

@@ -29,8 +29,7 @@ public class GameController : MonoBehaviour
     }
     private void OnBlockBrokenHandler(Block block)
     {
-        int price = block.Price;
-
+        _player.ApplyBlockReward(block.Reward, block.Resource);
         block.OnBlockBroken -= OnBlockBrokenHandler;
         Destroy(block.gameObject);
     }

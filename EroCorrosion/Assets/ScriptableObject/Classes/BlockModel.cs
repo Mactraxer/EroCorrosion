@@ -3,9 +3,18 @@
 [CreateAssetMenu(fileName = "BlockModel", menuName = "ScriptableObjects/Create BlockModel")]
 public class BlockModel : ScriptableObject
 {
-    [SerializeField] private int _healthPoints;
+    [Header("Paramenters")]
+    [SerializeField] private int _quantityPoints;
+    [SerializeField] private int _count;
+    [SerializeField] private ResourceModel _resource;
+    [SerializeField] private int _rewardCount;
+    [Header("Render")]
     [SerializeField] private Sprite _sprite;
 
-    public int HealthPoints => _healthPoints;
+    public int QuantityPoints => _quantityPoints;
     public Sprite Sprite => _sprite;
+
+    public int Count => _count;
+    public ResourceModel Resource => _resource;
+    public int RewardCount => _rewardCount;
 }

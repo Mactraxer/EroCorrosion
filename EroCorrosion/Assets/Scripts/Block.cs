@@ -4,27 +4,58 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     public Action<Block> OnBlockBroken;
+    public Action<int, ResourceModel> OnBlockDig;
 
     [SerializeField] private BlockModel _model;
     [SerializeField] private SpriteRenderer _render;
 
-    private int _currentHelthPoints;
+    private int _currentQuantityPoints;
+    private int _currentCount;
+
+    public int Price => _model.Resource.Prirce;
+    public int Reward => _model.RewardCount;
+    public ResourceModel Resource => _model.Resource;
 
     private void Start()
     {
         _render = GetComponent<SpriteRenderer>();
 
-        _currentHelthPoints = _model.HealthPoints;
+        _currentQuantityPoints = _model.QuantityPoints;
+        _currentCount = _model.Count;
     }
     public void ApplyDamage(int damage)
     {
-        if (_currentHelthPoints - damage < 1)
+        if (_currentQuantityPoints - damage < 1)
         {
-            OnBlockBroken?.Invoke(this);
+            BrokeBlockPart(damage);
         }
         else
         {
-            _currentHelthPoints -= damage;
+            _currentQuantityPoints -= damage;
+        }
+    }
+
+    private void BrokeBlockPart(int damage)
+    {
+        if (_currentCount > 1)
+        {
+            var brokenParts = 1;
+            brokenParts += damage / _model.QuantityPoints;
+
+            if (brokenParts >= _currentCount)
+            {
+                OnBlockBroken?.Invoke(this);
+            }
+            else
+            {
+                _currentQuantityPoints = _model.QuantityPoints;
+                _currentCount--;
+                OnBlockDig?.Invoke(brokenParts, _model.Resource);
+            }
+        }
+        else
+        {
+            OnBlockBroken?.Invoke(this);
         }
     }
 }
