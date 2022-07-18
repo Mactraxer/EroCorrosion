@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private Player _player;
     [SerializeField] private List<Block> _blocks;
-    [SerializeField] private InfoPanel _info;
+    [SerializeField] private Shop _shop;
 
     private void Start()
     {

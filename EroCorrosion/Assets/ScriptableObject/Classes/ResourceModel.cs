@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ResourceModel", menuName = "ScriptableObject/Create ResourceModel")]
+[CreateAssetMenu(fileName = "ResourceModel", menuName = "ScriptableObjects/Create ResourceModel")]
 public class ResourceModel : ScriptableObject
 {
-    [SerializeField] private int _prirce;
-    [SerializeField] private int _name;
+    [SerializeField] private int _price;
+    [SerializeField] private string _name;
 
-    public int Prirce => _prirce;
-    public int Name => _name;
+    public int Price => _price;
+    public string Name => _name;
 }

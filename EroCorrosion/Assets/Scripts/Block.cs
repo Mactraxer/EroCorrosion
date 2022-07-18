@@ -12,7 +12,7 @@ public class Block : MonoBehaviour
     private int _currentQuantityPoints;
     private int _currentCount;
 
-    public int Price => _model.Resource.Prirce;
+    public int Price => _model.Resource.Price;
     public int Reward => _model.RewardCount;
     public ResourceModel Resource => _model.Resource;
 
